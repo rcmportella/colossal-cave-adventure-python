@@ -5,6 +5,7 @@ This is a Python translation of the original 1976 Colossal Cave Adventure game, 
 ## About
 
 The original game was written by Will Crowther in 1976 and is considered the first text adventure game in video game history. This Python version maintains the gameplay and logic of the original while using modern Python programming practices.
+The original Fortran source can be found in https://github.com/wh0am1-dev/adventure
 
 ## Requirements
 

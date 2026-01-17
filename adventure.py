@@ -84,6 +84,13 @@ features of the current program were added by Don Woods.
         # Check for dwarves
         self.check_dwarves()
         
+        # Check if this is a forced-move location (error messages that auto-return)
+        # Locations 20-26 are error messages that immediately send you elsewhere
+        if 20 <= self.location <= 26:
+            # These locations have a single entry with code 1 that indicates where to go
+            if self.location in travel_table and 1 in travel_table[self.location]:
+                self.location = travel_table[self.location][1]
+        
         # Describe location
         is_dark = not can_see(self.location, self.object_place.get(LAMP),
                              self.lamp_on, location_conditions)
@@ -151,6 +158,10 @@ features of the current program were added by Don Woods.
                 elif code == 10:  # Look
                     self.location_abbrev[self.location] = 0
                     break
+                elif code == 17:  # List available movements
+                    list_available_movements(self.location, travel_table, vocabulary, self.object_place)
+                elif code == 18:  # Show location number
+                    print(f"You are at location {self.location}.")
                 else:
                     # Need an object
                     if word2:
@@ -202,12 +213,14 @@ features of the current program were added by Don Woods.
         """Handle special location transitions"""
         offset = special_code - 300
         
-        if offset == 1:  # Random choice between two locations
+        if offset == 0:  # Random choice between two locations (300)
             return 5 if random_chance(0.5) else 6
-        elif offset == 2:  # Grate check (going down)
+        elif offset == 1:  # Grate check going down (301)
             return 9 if self.object_props.get(GRATE, 0) == 1 else 23
-        elif offset == 3:  # Grate check (going up)
-            return 8 if self.object_props.get(GRATE, 0) == 1 else 9
+        elif offset == 2:  # Grate check going up (302)
+            return 8 if self.object_props.get(GRATE, 0) == 1 else 25
+        elif offset == 3:  # Pit check (303)
+            return 15 if self.object_props.get(GRATE, 0) == 1 else 14
         else:
             return self.location
     

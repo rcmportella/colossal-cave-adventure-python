@@ -78,6 +78,68 @@ def describe_location(location, long_desc, short_desc, abbrev_count, is_dark):
     elif location in short_desc:
         print(short_desc[location])
         print()
+    elif location in long_desc:
+        # Fallback to long description if short description doesn't exist
+        for line in long_desc[location]:
+            print(line)
+        print()
+
+
+def list_available_movements(location, travel_table, vocabulary, object_place=None):
+    """List all available commands at the current location"""
+    print("Available commands at this location:")
+    print()
+    
+    # Magic words that should not be revealed (player must discover them)
+    magic_codes = {48, 65, 55}  # XYZZY, PLUGH, Y2
+    
+    # 1. Movement commands
+    if location in travel_table:
+        available_motions = travel_table[location].keys()
+        
+        # Find words that map to these motion codes
+        movement_words = {}
+        for word, value in vocabulary.items():
+            # Only consider motion words (not tuples)
+            if not isinstance(value, tuple):
+                if value in available_motions and value not in magic_codes:
+                    if value not in movement_words:
+                        movement_words[value] = []
+                    movement_words[value].append(word)
+        
+        if movement_words:
+            print("Movement:")
+            # Sort by motion code for consistent ordering
+            for motion_code in sorted(movement_words.keys()):
+                words = movement_words[motion_code]
+                # Show the shortest/most common word for each direction
+                primary_word = min(words, key=len)
+                print(f"  {primary_word.upper()}")
+            print()
+    
+    # 2. Objects at this location
+    if object_place:
+        objects_here = []
+        for word, value in vocabulary.items():
+            if isinstance(value, tuple) and value[1] == 1:  # Object type
+                obj_id = value[0]
+                if obj_id in object_place and object_place[obj_id] == location:
+                    objects_here.append(word)
+        
+        if objects_here:
+            print("Objects you can interact with:")
+            # Remove duplicates and sort
+            unique_objects = sorted(set(objects_here))
+            for obj in unique_objects:
+                print(f"  {obj.upper()}")
+            print()
+    
+    # 3. General commands always available
+    print("General commands:")
+    print("  INVENTORY (I) - check what you're carrying")
+    print("  LOOK (L) - look around again")
+    print("  QUIT - quit the game")
+    print()
 
 
 def describe_objects(location, objects, object_place, object_props, object_desc):

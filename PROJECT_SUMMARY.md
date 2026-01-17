@@ -159,3 +159,11 @@ The translation demonstrates how legacy code can be modernized while respecting 
 ---
 
 **Ready to play!** Run `python3 adventure.py` to start your adventure!
+
+# Version Control
+    0.1.0-alpha: Testing/development phase
+    When stable → 0.1.0
+    Bug fixes → 0.1.1, 0.1.2
+    New features → 0.2.0, 0.3.0
+    Major changes → 1.0.0
+

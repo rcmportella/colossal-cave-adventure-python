@@ -1,6 +1,9 @@
 # Colossal Cave Adventure - Python Version
 
+**Version:** 0.1.0-alpha
+
 This is a Python translation of the original 1976 Colossal Cave Adventure game, originally written in Fortran 77.
+Still lots of bugs. The conversion from Fortran to Python was done through AI. I am in the process of cleaning it right now.
 
 ## About
 
@@ -15,7 +18,7 @@ The original Fortran source can be found in https://github.com/wh0am1-dev/advent
 ## How to Play
 
 ```bash
-python adventure.py
+python play.py
 ```
 
 ## Game Commands

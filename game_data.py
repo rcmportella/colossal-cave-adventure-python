@@ -120,7 +120,8 @@ messages = {
     77: "Where?",
     78: "Your bottle is empty and the ground is wet.",
     79: "You have taken a rare photograph.",
-    80: "I beg your pardon?"
+    80: "I beg your pardon?",
+    100: "Do you really want to quit now?"
 }
 
 # Location descriptions (short form)

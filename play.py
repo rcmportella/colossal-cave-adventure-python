@@ -4,9 +4,12 @@ Quick start guide for Colossal Cave Adventure
 Demonstrates basic gameplay
 """
 
-print("""
+from adventure import __version__
+
+print(f"""
 =================================================================
-    COLOSSAL CAVE ADVENTURE - QUICK START GUIDE
+    COLOSSAL CAVE ADVENTURE v{__version__}
+    Quick Start Guide
 =================================================================
 
 BASIC COMMANDS:

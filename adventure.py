@@ -7,6 +7,8 @@ This is a text adventure game where you explore a cave system,
 collect treasures, and avoid dangers.
 """
 
+__version__ = "0.1.0-alpha"
+
 import random
 import sys
 from game_data import *
@@ -169,7 +171,7 @@ features of the current program were added by Don Woods.
         """Handle movement commands"""
         # Special motion codes
         if motion_code == 17:  # QUIT
-            if yes_no_question(22, 0, 0, {"22": "Do you really want to quit now?"}):
+            if yes_no_question(100, 0, 0, messages):
                 print("OK. Goodbye!")
                 sys.exit(0)
             return False

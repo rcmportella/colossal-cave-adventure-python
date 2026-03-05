@@ -85,6 +85,46 @@ def describe_location(location, long_desc, short_desc, abbrev_count, is_dark):
         print()
 
 
+def show_help_exits(location, travel_table, vocabulary):
+    """Show obvious exits from current location (excluding secret/magic locations)"""
+    # Magic words and secret passages that should not be revealed
+    secret_codes = {48, 65, 55, 66, 40}  # XYZZY, PLUGH, Y2, SECRET, MAGIC
+    
+    if location not in travel_table:
+        print("There are no obvious exits.")
+        print()
+        return
+    
+    available_motions = travel_table[location].keys()
+    
+    # Find words that map to these motion codes (excluding secrets)
+    movement_words = {}
+    for word, value in vocabulary.items():
+        # Only consider motion words (not tuples)
+        if not isinstance(value, tuple):
+            if value in available_motions and value not in secret_codes:
+                if value not in movement_words:
+                    movement_words[value] = []
+                movement_words[value].append(word)
+    
+    if movement_words:
+        print("Obvious exits:")
+        # Get primary direction names
+        exits = []
+        for motion_code in sorted(movement_words.keys()):
+            words = movement_words[motion_code]
+            # Show the shortest/most common word for each direction
+            primary_word = min(words, key=len)
+            exits.append(primary_word.upper())
+        
+        # Display exits in a compact format
+        print("  " + ", ".join(exits))
+    else:
+        print("There are no obvious exits.")
+    print("Type QUIT to exit the game.")
+    print()
+
+
 def list_available_movements(location, travel_table, vocabulary, object_place=None):
     """List all available commands at the current location"""
     print("Available commands at this location:")

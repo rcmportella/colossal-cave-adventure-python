@@ -162,6 +162,8 @@ features of the current program were added by Don Woods.
                     list_available_movements(self.location, travel_table, vocabulary, self.object_place)
                 elif code == 18:  # Show location number
                     print(f"You are at location {self.location}.")
+                elif code == 19:  # HELP - show exits (non-secret)
+                    show_help_exits(self.location, travel_table, vocabulary)
                 else:
                     # Need an object
                     if word2:

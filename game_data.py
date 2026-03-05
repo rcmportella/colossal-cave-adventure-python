@@ -420,6 +420,7 @@ vocabulary = {
     'POUR': (16, 2),
     'LIST': (17, 2), 'OPTIONS': (17, 2), 'COMMANDS': (17, 2),
     'LOCATION': (18, 2), 'WHERE': (18, 2),
+    'HELP': (19, 2), 'EXITS': (19, 2),
 }
 
 # Travel table - format: {location: {motion_code: new_location}}
